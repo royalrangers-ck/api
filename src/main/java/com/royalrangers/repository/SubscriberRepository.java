@@ -8,4 +8,7 @@ import javax.transaction.Transactional;
 @Transactional
 public interface SubscriberRepository extends CrudRepository<Subscriber, Long> {
 
+    Subscriber findByEmail(String email);
+
+    void deleteByEmail(String email);
 }

@@ -1,24 +1,42 @@
 package com.royalrangers.controller;
 
+import com.royalrangers.bean.ResponseResult;
 import com.royalrangers.model.Subscriber;
 import com.royalrangers.repository.SubscriberRepository;
+import com.royalrangers.service.SubscribeService;
+import com.royalrangers.utils.ResponseBuilder;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
+@Slf4j
 @RestController
+@RequestMapping("/subscribe")
 public class SubscribeController {
     @Autowired
-    private SubscriberRepository subscriberRepository;
+    private SubscribeService subscribeService;
 
-    @RequestMapping("/create")
-    public Subscriber create(String email) {
+    @PostMapping
+    public ResponseResult subscribe(@RequestBody String email) {
 
-        Subscriber subscriber = new Subscriber(new Date(), new Date(), email);
-        subscriberRepository.save(subscriber);
+        log.info("Add subscriber: " + email);
+        try {
+            subscribeService.add(email);
+            return ResponseBuilder.success(String.format("Email %s added to subscribers list", email));
+        } catch (Exception e) {
+            return ResponseBuilder.fail(e.getMessage());
+        }
+    }
 
-        return subscriber;
+    @DeleteMapping
+    public ResponseResult unsubscribe(@RequestBody String email) {
+
+        log.info("Remove subscriber: " + email);
+        try {
+            subscribeService.remove(email);
+            return ResponseBuilder.success(String.format("Email %s removed from subscribers list", email));
+        } catch (Exception e) {
+            return ResponseBuilder.fail(e.getMessage());
+        }
     }
 }
