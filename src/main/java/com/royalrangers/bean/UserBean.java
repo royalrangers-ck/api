@@ -5,11 +5,15 @@ import com.royalrangers.enums.UserAgeGroup;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 public class UserBean {
 
     private Long id;
+    private Date createDate;
+    private Date updateDate;
     private String email;
     private String password;
     private String firstName;
