@@ -64,6 +64,8 @@ public class UserService {
 
     public User createUserFromUserForm(UserBean userBean) {
         User user = new User();
+        user.setCreateDate(new Date());
+        user.setUpdateDate(new Date());
         user.setEmail(userBean.getEmail());
         user.setFirstName(userBean.getFirstName());
         user.setLastName(userBean.getLastName());
@@ -92,6 +94,8 @@ public class UserService {
 
     public static UserBean buildUserBean(User user) {
         UserBean userBean = new UserBean();
+        userBean.setCreateDate(user.getCreateDate());
+        userBean.setUpdateDate(user.getUpdateDate());
         userBean.setId(user.getId());
         userBean.setEmail(user.getEmail());
         userBean.setPassword(user.getPassword());

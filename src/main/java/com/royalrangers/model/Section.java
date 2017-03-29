@@ -6,15 +6,13 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Getter
 @Setter
 @Entity
-public class Section {
+public class Section extends BaseModel{
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @NotNull
     private String name;
 
@@ -25,7 +23,8 @@ public class Section {
 
     public Section() {}
 
-    public Section(Platoon platoon, String name) {
+    public Section(Platoon platoon, Date createDate, Date updateDate, String name) {
+        super(createDate,updateDate);
         this.platoon = platoon;
         this.name = name;
     }

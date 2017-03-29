@@ -65,8 +65,8 @@ public class UserTwelveYearAchievementService {
 
     public void addUserTwelveYearAchievement(Map<String, Object> params) {
         UserTwelveYearAchievement savedUserAchievement = new UserTwelveYearAchievement();
-        savedUserAchievement.setCreateDate((new Date()).getTime());
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setCreateDate(new Date());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");
@@ -115,7 +115,7 @@ public class UserTwelveYearAchievementService {
 
     public void editTwelveYearAchievement(Map<String, Object> params, Long id) {
         UserTwelveYearAchievement editUserAchievement = userTwelveYearAchievementRepository.findOne(id);
-        editUserAchievement.setUpdateDate((new Date()).getTime());
+        editUserAchievement.setUpdateDate(new Date());
         Integer userId = (Integer) params.get("userId");
         Integer userReviewerId = (Integer) params.get("reviewerId");
         if (!userRepository.exists(userId.longValue()) || !userRepository.exists(userReviewerId.longValue())) {

@@ -5,6 +5,8 @@ import com.royalrangers.repository.SubscriberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class SubscribeService {
     @Autowired
@@ -14,7 +16,7 @@ public class SubscribeService {
         if (subscriberRepository.findByEmail(email) != null) {
             throw new IllegalArgumentException("This email already exist in subscribers list");
         } else {
-            Subscriber subscriber = new Subscriber(email);
+            Subscriber subscriber = new Subscriber(new Date(), new Date(),email);
             subscriberRepository.save(subscriber);
         }
     }

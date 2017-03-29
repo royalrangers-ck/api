@@ -1,6 +1,7 @@
 package com.royalrangers.model.achievement;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.royalrangers.model.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,16 +10,10 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-public class Task {
+public class Task extends BaseModel {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(length = 100)
     private String name;
 
-    @Column(length = 300)
     private String description;
 
     @JsonIgnore

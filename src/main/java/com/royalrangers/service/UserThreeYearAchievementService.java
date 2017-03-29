@@ -64,8 +64,8 @@ public class UserThreeYearAchievementService {
 
     public void addUserThreeYearAchievement(Map<String, Object> params){
         UserThreeYearAchievement savedUserAchievement = new UserThreeYearAchievement();
-        savedUserAchievement.setCreateDate((new Date()).getTime());
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setCreateDate(new Date());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");
@@ -114,7 +114,7 @@ public class UserThreeYearAchievementService {
 
     public void editUserThreeYearAchievement(Map<String, Object> params, Long id){
         UserThreeYearAchievement savedUserAchievement = userThreeYearAchievementRepository.findOne(id);
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");

@@ -1,5 +1,6 @@
 package com.royalrangers.model.achievement;
 
+import com.royalrangers.model.BaseModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,25 +10,16 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class Achievement {
+public abstract class Achievement extends BaseModel {
 
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column(length = 50)
     @NotNull
     private String name;
 
-    @Column
     @NotNull
     private String description;
 
-    @Column
     private String logoUrl;
 
-    @Column(length = 150)
     @NotNull
     private String requirements;
 

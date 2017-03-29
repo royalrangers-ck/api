@@ -12,19 +12,14 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", sequenceName = "user_seq", allocationSize = 1)
-    private Long id;
+public class User extends BaseModel {
 
     private String email;
     private String password;
     private String firstName;
     private String lastName;
-    private String telephoneNumber;
     private String gender;
+    private String telephoneNumber;
     private Long birthDate;
     private Boolean enabled;
     private Boolean confirmed;
@@ -38,7 +33,7 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id")
     private Country country;
-    
+
     @ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private City city;

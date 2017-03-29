@@ -64,8 +64,8 @@ public class UserTestService {
 
     public void addUserTestAchievement(Map<String, Object> params) {
         UserTest savedUserAchievement = new UserTest();
-        savedUserAchievement.setCreateDate((new Date()).getTime());
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setCreateDate(new Date());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");
@@ -114,7 +114,7 @@ public class UserTestService {
 
     public void editUserTestAchievement(Map<String, Object> params, Long id) {
         UserTest savedUserAchievement = userTestRepository.findOne(id);
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");

@@ -11,13 +11,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-public class VerificationToken {
+public class VerificationToken extends BaseModel {
 
     private static final int EXPIRATION = 60 * 24;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
 
     private String token;
 

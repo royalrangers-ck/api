@@ -39,11 +39,11 @@ public class Bootstrap {
             user.setLastName("last " + element);
             user.setGender("gender " + element);
             user.setEnabled(true);
-            user.setCountry(new Country("Ukraine" + element));
-            user.setCity(new City(user.getCountry(), "Cherkasy" + element));
-            user.setGroup(new Group(user.getCity(), "group " + element));
-            user.setPlatoon(new Platoon(user.getGroup(), "platoon " + element));
-            user.setSection(new Section(user.getPlatoon(), "section " + element));
+            user.setCountry(new Country(new Date(), new Date(),"Ukraine" + element));
+            user.setCity(new City(user.getCountry(), new Date(), new Date(),"Cherkasy" + element));
+            user.setGroup(new Group(user.getCity(), new Date(), new Date(), "group " + element));
+            user.setPlatoon(new Platoon(user.getGroup(),new Date(), new Date(), "platoon " + element));
+            user.setSection(new Section(user.getPlatoon(),new Date(), new Date(), "section " + element));
             user.setLastPasswordResetDate(new Date(new GregorianCalendar(2016,
                     Calendar.FEBRUARY, 9).getTimeInMillis()));
             Authority userAuthority = authorityRepository.findOne(1L);

@@ -1,27 +1,17 @@
 package com.royalrangers.model.achievement;
 
 import com.royalrangers.enums.achivement.AchievementStatus;
+import com.royalrangers.model.BaseModel;
 import com.royalrangers.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
 @Entity
-public class UserYearAchievement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
-    @Column
-    private Long createDate;
-
-    @Column
-    private Long updateDate;
+public class UserYearAchievement extends BaseModel {
 
     @Enumerated
     private AchievementStatus achievementStatus;

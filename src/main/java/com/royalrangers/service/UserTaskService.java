@@ -65,8 +65,8 @@ public class UserTaskService {
 
     public void addUserTaskAchievement(Map<String, Object> params) {
         UserTask savedUserAchievement = new UserTask();
-        savedUserAchievement.setCreateDate((new Date()).getTime());
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setCreateDate(new Date());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");
@@ -115,7 +115,7 @@ public class UserTaskService {
 
     public void editUserTaskAchievement(Map<String, Object> params, Long id) {
         UserTask savedUserAchievement = userTaskRepository.findOne(id);
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");

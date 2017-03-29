@@ -64,8 +64,8 @@ public class UserQuarterAchievementService {
 
     public void addUserQuarterAchievement(Map<String, Object> params) {
         UserQuarterAchievement savedUserAchievement = new UserQuarterAchievement();
-        savedUserAchievement.setCreateDate((new Date()).getTime());
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setCreateDate(new Date());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");
@@ -114,7 +114,7 @@ public class UserQuarterAchievementService {
 
     public void editUserQuarterAchievement(Map<String, Object> params, Long id) {
         UserQuarterAchievement savedUserAchievement = userQuarterAchievementRepository.findOne(id);
-        savedUserAchievement.setUpdateDate((new Date()).getTime());
+        savedUserAchievement.setUpdateDate(new Date());
         Integer achievementStatus = (Integer) params.get("status");
         savedUserAchievement.setAchievementStatus(AchievementStatus.values()[achievementStatus]);
         Integer userId = (Integer) params.get("userId");
