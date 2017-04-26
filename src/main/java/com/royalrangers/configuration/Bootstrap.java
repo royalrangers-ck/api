@@ -3,7 +3,9 @@ package com.royalrangers.configuration;
 import com.royalrangers.enums.AuthorityName;
 import com.royalrangers.model.*;
 import com.royalrangers.repository.AuthorityRepository;
+import com.royalrangers.repository.CountryRepository;
 import com.royalrangers.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,19 +13,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Component
 public class Bootstrap {
     private final String DDL_AUTO_CREATE = "create";
     private final String DDL_AUTO_CREATE_DROP = "create-drop";
+    private final String UKRAINE_CITIES = "src/main/resources/init/ukraine.cities";
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlAuto;
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private CountryRepository countryRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -33,6 +44,11 @@ public class Bootstrap {
         if(DDL_AUTO_CREATE.equals(ddlAuto) || DDL_AUTO_CREATE_DROP.equals(ddlAuto)) {
             initAuthorities();
             initUsers();
+            try {
+                initCountry("Україна", UKRAINE_CITIES);
+            } catch (IOException e){
+                log.error("Error in loading file " + e.getMessage());
+            }
         }
     }
 
@@ -95,6 +111,16 @@ public class Bootstrap {
         superAdminAuthority.setName(AuthorityName.ROLE_SUPER_ADMIN);
         authorityRepository.save(superAdminAuthority);
         authorityRepository.save(superAdminAuthority);
+    }
+
+    private void initCountry(String countryName, String path) throws IOException{
+        Country country = new Country(countryName);
+        Set <City> citySet = new HashSet<>();
+        Files.lines(Paths.get(path), StandardCharsets.UTF_8)
+                .forEach(element -> citySet.add(new City(country,element)));
+        country.setCity(citySet);
+        countryRepository.save(country);
+
     }
 
 }

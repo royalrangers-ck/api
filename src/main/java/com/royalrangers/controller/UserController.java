@@ -20,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.List;
 
+import static com.royalrangers.service.DropboxService.isFileSizeCorrect;
+
 @Slf4j
 @RestController
 @RequestMapping("/user")
@@ -110,6 +112,9 @@ public class UserController {
     @PostMapping("/avatar")
     @ApiOperation(value = "Upload and set user avatar")
     public ResponseResult upload(@RequestParam("file") MultipartFile file) {
+        if (!isFileSizeCorrect(file, 1024*1024))
+            return ResponseBuilder.fail("File too large.");
+
         try {
             String avatarUrl = dropboxService.imageUpload(file, ImageType.USER_AVATAR);
             log.info("Set user avatar public URL: " +avatarUrl);

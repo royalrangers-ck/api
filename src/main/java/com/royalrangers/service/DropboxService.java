@@ -3,7 +3,6 @@ package com.royalrangers.service;
 import com.dropbox.core.DbxException;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.v2.DbxClientV2;
-import com.dropbox.core.v2.files.FileMetadata;
 import com.royalrangers.enums.ImageType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -122,5 +121,12 @@ public class DropboxService {
                 .replaceAll("www.dropbox.com", "dl.dropboxusercontent.com");
 
         return directUrl;
+    }
+
+    public static Boolean isFileSizeCorrect(MultipartFile file, long maxFileSize) {
+        if (file.getSize() <= maxFileSize)
+            return true;
+        else
+            return false;
     }
  }
