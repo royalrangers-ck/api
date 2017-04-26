@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 public class Bootstrap {
     private final String DDL_AUTO_CREATE = "create";
     private final String DDL_AUTO_CREATE_DROP = "create-drop";
-    private final String UKRAINE_CITIES = "src\\main\\resources\\init\\ukraine.cities";
+    private final String UKRAINE_CITIES = "src/main/resources/init/ukraine.cities";
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String ddlAuto;
