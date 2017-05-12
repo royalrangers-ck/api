@@ -59,9 +59,9 @@ public class Bootstrap {
     @Autowired
     private QuarterAchievementService quarterAchievementService;
 
-    public AchievementBootstrap achievementBootstrap = new AchievementBootstrap();
+    private AchievementBootstrap achievementBootstrap = new AchievementBootstrap();
 
-    TestBootstrap testBootstrap = new TestBootstrap();
+    private TestBootstrap testBootstrap = new TestBootstrap();
 
     @Autowired
     private TestService testService;
@@ -69,22 +69,19 @@ public class Bootstrap {
     @Autowired
     private TestRepository testRepository;
 
-    TaskBootstrap taskBootstrap = new TaskBootstrap();
+    private TaskBootstrap taskBootstrap = new TaskBootstrap();
 
     @Autowired
     private RewardService rewardService;
 
-    RewardBootstrap rewardBootstrap = new RewardBootstrap();
+    private RewardBootstrap rewardBootstrap = new RewardBootstrap();
 
     @Autowired
     private TaskRepository taskRepository;
 
-
     @PostConstruct
     public void init() {
         if (DDL_AUTO_CREATE.equals(ddlAuto) || DDL_AUTO_CREATE_DROP.equals(ddlAuto)) {
-            initAuthorities();
-            initUsers();
             try {
                 initCountry("Україна", UKRAINE_CITIES);
             } catch (IOException e) {
@@ -92,6 +89,8 @@ public class Bootstrap {
             }
             initTwelveYear();
             initReward();
+            initAuthorities();
+            initUsers();
         }
     }
 
@@ -108,7 +107,7 @@ public class Bootstrap {
             user.setEnabled(true);
             user.setConfirmed(true);
             user.setApproved(true);
-            user.setCountry(new Country("Ukraine" + element));
+            user.setCountry(new Country(countryRepository.findOne(1L).getName()));
             user.setCity(new City(user.getCountry(), "Cherkasy" + element));
             user.setGroup(new Group(user.getCity(), "group " + element));
             user.setPlatoon(new Platoon(user.getGroup(), "platoon " + element));
