@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -446,6 +445,11 @@ public class UserService {
         userRepository.save(user);
         log.info("Change password for user: " + user.getEmail());
     }
+
+    public List<User> getUsersBySectionId(Long sectionId){
+        return userRepository.findAllBySectionId(1L);
+    }
+
 }
 
 

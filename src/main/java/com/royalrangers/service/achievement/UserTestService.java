@@ -4,6 +4,7 @@ import com.royalrangers.dto.achievement.UserAchievementRequestDto;
 import com.royalrangers.dto.achievement.UserTestRequestDto;
 import com.royalrangers.enums.UserAgeGroup;
 import com.royalrangers.enums.achivement.AchievementState;
+import com.royalrangers.model.User;
 import com.royalrangers.model.achievement.Task;
 import com.royalrangers.model.achievement.Test;
 import com.royalrangers.model.achievement.UserTest;
@@ -37,13 +38,12 @@ public class UserTestService {
         return userTestRepository.findByUserId(userService.getAuthenticatedUserId());
     }
 
-    public UserTest addUserTest(UserTestRequestDto params) {
+    public UserTest addUserTest(UserTestRequestDto params, User user) {
         UserTest savedUserAchievement = new UserTest();
-        savedUserAchievement.setAchievementState(AchievementState.IN_PROGRESS);
-        savedUserAchievement.setUser(userService.getUserById(userService.getAuthenticatedUserId()));
-        Integer testId = params.getTestId();
-        savedUserAchievement.setTest(testService.getTestById(testId.longValue()));
-        List<Task> tasks = testService.getTestById(testId.longValue()).getTaskList();
+        savedUserAchievement.setAchievementState(AchievementState.NOT_STARTED);
+        savedUserAchievement.setUser(user);
+        savedUserAchievement.setTest(testService.getTestById(params.getTestId()));
+        List<Task> tasks = testService.getTestById(params.getTestId()).getTaskList();
         tasks.forEach(task -> userTaskService.addTaskForUser(task));
         userTestRepository.saveAndFlush(savedUserAchievement);
         return savedUserAchievement;
