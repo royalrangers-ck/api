@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.royalrangers.model.Views;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Getter
@@ -21,5 +20,10 @@ public class UserTest extends UserAchievement {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userQuarterAchievement_id", nullable = true)
     private UserQuarterAchievement userQuarterAchievement;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userYearAchievement_id", nullable = true)
+    private UserYearAchievement userYearAchievement;
 
 }

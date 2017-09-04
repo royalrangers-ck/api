@@ -441,6 +441,10 @@ public class UserService {
         userRepository.save(user);
         log.info("Change password for user: " + user.getEmail());
     }
+
+    public List<User> getUsersBySectionId(Long sectionId){
+        return userRepository.findAllBySectionId(sectionId);
+    }
 }
 
 

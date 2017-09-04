@@ -31,18 +31,6 @@ public class UserYearAchievementController {
         }
     }
 
-    @PostMapping
-    @ApiOperation(value = "Add the year achievement for current user")
-    public ResponseResult addUserYearAchievement(@RequestBody UserAchievementRequestDto params) {
-        try {
-            log.info("Add UserYearAchievement " + params.getId());
-            return ResponseBuilder.success(userYearAchievementService.addUserYearAchievement(params));
-        } catch (Exception ex) {
-            log.error(ex.getMessage());
-            return ResponseBuilder.fail("Failed add userAchievement");
-        }
-    }
-
     @JsonView(Views.Achievement.class)
     @GetMapping("/{userAchievementId}")
     @ApiOperation(value = "Get year achievement info")

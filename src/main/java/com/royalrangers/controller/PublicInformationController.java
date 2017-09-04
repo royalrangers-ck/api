@@ -16,7 +16,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.List;
@@ -139,4 +138,5 @@ public class PublicInformationController {
         }
         return ResponseBuilder.success("User password was changed successfully");
     }
+
 }

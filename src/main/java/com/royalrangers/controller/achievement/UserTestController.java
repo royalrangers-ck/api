@@ -83,10 +83,9 @@ public class UserTestController {
 
     @PutMapping("/{userTestId}")
     @ApiOperation(value = "Update user test")
-    public ResponseResult editUserTest(@RequestBody UserAchievementRequestDto params, @PathVariable Long userTestId) {
+    public ResponseResult editUserTest(@RequestBody UserAchievementRequestDto params) {
         try {
-            userTestService.editUserTest(params, userTestId);
-            return ResponseBuilder.success(userTestService.getUserTestById(userTestId));
+            return ResponseBuilder.success(userTestService.editUserTest(params));
         } catch (Exception ex) {
             log.error(ex.getMessage());
             return ResponseBuilder.fail("Failed edit UserTest");

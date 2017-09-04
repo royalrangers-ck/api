@@ -46,8 +46,19 @@ public class Test extends BaseModel {
     private List<Task> taskList;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quarterAchievement_id", nullable = true)
-    private QuarterAchievement quarterAchievement;
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tests", fetch = FetchType.LAZY)
+    private List<RoadMapQuarterAchievement> roadMapQuarterAchievement;
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "tests", fetch = FetchType.LAZY)
+    private List<RoadMapYearAchievement> roadMapYearAchievement;
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "additionalTests", fetch = FetchType.LAZY)
+    private List<RoadMapQuarterAchievement> roadMapQuarter;
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "additionalTests", fetch = FetchType.LAZY)
+    private List<RoadMapYearAchievement> roadMapYear;
 
 }

@@ -2,7 +2,8 @@ package com.royalrangers.service.achievement;
 
 import com.royalrangers.dto.achievement.UserAchievementRequestDto;
 import com.royalrangers.enums.achivement.AchievementState;
-import com.royalrangers.model.achievement.UserYearAchievement;
+import com.royalrangers.model.User;
+import com.royalrangers.model.achievement.*;
 import com.royalrangers.repository.achievement.UserYearAchievementRepository;
 import com.royalrangers.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,11 @@ public class UserYearAchievementService {
         return userYearAchievementRepository.findByUserId(userService.getAuthenticatedUserId());
     }
 
-    public UserYearAchievement addUserYearAchievement(UserAchievementRequestDto params) {
+    public UserYearAchievement addUserYearAchievement(YearAchievement yearAchievement, User user) {
         UserYearAchievement savedUserAchievement = new UserYearAchievement();
-        String achievementStatus = params.getState();
-        savedUserAchievement.setAchievementState(AchievementState.valueOf(achievementStatus));
-        savedUserAchievement.setUser(userService.getUserById(userService.getAuthenticatedUserId()));
-        Integer yearId = params.getId();
-        savedUserAchievement.setYearAchievement(yearAchievementService.getYearAchievementById(yearId.longValue()));
+        savedUserAchievement.setAchievementState(AchievementState.NOT_STARTED);
+        savedUserAchievement.setUser(user);
+        savedUserAchievement.setYearAchievement(yearAchievement);
         userYearAchievementRepository.saveAndFlush(savedUserAchievement);
         return savedUserAchievement;
     }
@@ -58,4 +57,5 @@ public class UserYearAchievementService {
         savedUserAchievement.setYearAchievement(yearAchievementService.getYearAchievementById(yearId.longValue()));
         return userYearAchievementRepository.saveAndFlush(savedUserAchievement);
     }
+
 }

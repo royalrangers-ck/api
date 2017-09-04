@@ -12,4 +12,6 @@ public interface UserYearAchievementRepository extends JpaRepository<UserYearAch
     List<UserYearAchievement> findByUserId(Long id);
     List<UserYearAchievement> findAllByYearAchievement(Long yearAchievementId);
     List<UserYearAchievement> findByUserPlatoonIdAndAchievementState(Long id, AchievementState state);
+
+    UserYearAchievement findByUserIdAndYearAchievementId(Long id, Long yearId);
 }

@@ -5,7 +5,6 @@ import com.royalrangers.enums.UserAgeGroup;
 import com.royalrangers.model.Views;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -18,14 +17,18 @@ import java.util.List;
 public class UserQuarterAchievement extends UserAchievement {
 
     @JsonView(Views.Achievement.class)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userQuarterAchievement")
-    private List<UserTest> test;
-
-    @JsonView(Views.Achievement.class)
     private UserAgeGroup userAgeGroup;
 
     @JsonView(Views.Achievement.class)
     @OneToOne
     private QuarterAchievement quarterAchievement;
+
+    @JsonView(Views.Achievement.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userQuarterAchievement")
+    private List<UserTest> userTests;
+
+    @JsonView(Views.Achievement.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userQuarterAchievement")
+    private List<UserTest> additionalUserTests;
 
 }

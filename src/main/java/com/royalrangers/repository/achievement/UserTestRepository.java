@@ -14,5 +14,7 @@ public interface UserTestRepository extends JpaRepository<UserTest, Long>{
     List<UserTest> findByUserPlatoonIdAndAchievementState(Long id, AchievementState state);
     List<UserTest> findAllByTest(Long testId);
 
+    UserTest findByUserIdAndTestId(Long userId, Long testId);
+
     List<UserTest> findByAchievementStateAndTest_UserAgeGroupsContains(AchievementState achievementStates, List<UserAgeGroup> list);
 }
